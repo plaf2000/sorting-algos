@@ -18,10 +18,12 @@ public class Algos {
 	
 	
 	private void swap(int i, int j, boolean verbose) {
-		int t = b[i];
-		b[i] = b[j];
-		b[j] = t;
-		if(verbose) System.out.println(Arrays.toString(b));
+		if(b[i]!=b[j]) {
+			int t = b[i];
+			b[i] = b[j];
+			b[j] = t;
+			if(verbose) System.out.println(Arrays.toString(b));
+		}
 	}
 	
 	//================================
