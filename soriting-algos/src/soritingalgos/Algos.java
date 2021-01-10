@@ -182,12 +182,13 @@ public class Algos {
 	// QUICKSORT
 	//================================
 	
-	public void quickSort(int l, int r) {
+	public void quickSort(int l, int r, int p) {
 		
 	}
 	
 	public int[] quickSort() {
 		b=a.clone();
+		quickSort(0,len-2,len-1);
 		return b;
 	}
 	
