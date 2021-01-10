@@ -18,7 +18,6 @@ public class TestArrays {
 	
 	public static String testMess(String mname, boolean success,int[] s, int[] b) {
 		return (success) ? mname + " passed. " : mname + " failed \n \t The output is: \n \t" + Arrays.toString(b) + "\n \t instead of \n \t" + Arrays.toString(s) +"\n";
-//		return (success) ? "" : mname + " failed \n \t The output is: \n \t" + Arrays.toString(b) + "\n \t instead of \n \t" + Arrays.toString(s);
 	}
 	
 	public static String testMethod(int[] s, String mname, int[] b) { 
@@ -27,8 +26,8 @@ public class TestArrays {
 	
 	public static void printTime() {
 		long t = microSec();
-		double delta = ((double) (t-lastTime))/10E6;
-		System.out.println("Seconds: "+delta);
+		double delta = ((double) (t-lastTime))/10E3;
+		System.out.println("Milliseconds: "+delta);
 		lastTime=t;
 	}
 	
@@ -38,8 +37,7 @@ public class TestArrays {
 	
 	public static void testMethods(int[] a) {
 		System.out.println();
-//		System.out.println("\t\t\t\t\t"+a.length+"\t"+Arrays.toString(a));
-		System.out.print(a.length);
+		System.out.print("Array of length "+a.length);
 		System.out.println();
 		int[] aSorted = a.clone();
 		Arrays.sort(aSorted);
