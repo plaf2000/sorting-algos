@@ -70,6 +70,35 @@ public class Algos {
 	 * 
 	 */
 	
+	public int[] insertionSort() {
+		return insertionSort(false);
+	}
+	
+	public int[] insertionSort(boolean binarySearch) {
+		b = a.clone();
+		for(int i=1; i<len; i++) {
+			
+			// Implementing binary search
+			if(binarySearch) {
+				int pos = binarySearch(b[i],0,i-1);
+				insert(i,pos);
+			}
+			
+			
+			// Normal one
+			else {
+				int j=i;
+				while(j>0 && b[j]<b[j-1])  {
+					swap(j,j-1);
+					j--;
+				}
+			}
+			
+			
+		}
+		return b;
+	}
+	
 	private int binarySearch(int value, int left, int right) {
 		
 		int m = (right+left)/2;
@@ -100,35 +129,9 @@ public class Algos {
 	
 
 	
-	public int[] insertionSort(boolean binarySearch) {
-		b = a.clone();
-		for(int i=1; i<len; i++) {
-			
-			
-			if(binarySearch) {
-				int pos = binarySearch(b[i],0,i-1);
-				insert(i,pos);
-			}
-			
-			
-			
-			
-			else {
-				int j=i;
-				while(j>0 && b[j]<b[j-1])  {
-					swap(j,j-1);
-					j--;
-				}
-			}
-			
-			
-		}
-		return b;
-	}
+
 	
-	public int[] insertionSort() {
-		return insertionSort(false);
-	}
+
 	
 	
 	/*
@@ -176,6 +179,25 @@ public class Algos {
 	 * 
 	 */
 	
+	public int[] mergeSort() {
+		b=a.clone();
+		mergeSort(0,len-1);
+		return b;
+	}
+	
+	private void mergeSort(int l, int r) {
+		int m = (r+l)/2;
+		if(r>l) {
+			mergeSort(l,m);
+			mergeSort(m+1,r);
+			merge(l,m,r);
+		}
+		
+	}
+	
+
+	
+	
 	private void merge(int l,int m, int r) {
 		int i=l;
 		int j=m+1;
@@ -198,27 +220,18 @@ public class Algos {
 		for (i=l; i<l+c.length;i++) b[i]=c[i-l];
 	}
 	
-	private void mergeSort(int l, int r) {
-		int m = (r+l)/2;
-		if(r>l) {
-			mergeSort(l,m);
-			mergeSort(m+1,r);
-			merge(l,m,r);
-		}
-		
-	}
-	
-	public int[] mergeSort() {
-		b=a.clone();
-		mergeSort(0,len-1);
-		return b;
-	}
-	
+
 	/*
 	 * 
 	 * QUICKSORT
 	 * 
 	 */
+	
+	public int[] quickSort() {
+		b=a.clone();
+		quickSort(0,len-1);
+		return b;
+	}
 	
 	public void quickSort(int l, int r) {
 		int i=l;
@@ -252,10 +265,6 @@ public class Algos {
 			
 	}
 	
-	public int[] quickSort() {
-		b=a.clone();
-		quickSort(0,len-1);
-		return b;
-	}
+
 	
 }
