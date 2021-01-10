@@ -26,9 +26,11 @@ public class Algos {
 		}
 	}
 	
-	//================================
-	// BUBBLE SORT
-	//================================
+	/*
+	 * 
+	 * BUBBLE SORT
+	 * 
+	 */
 	
 	public int[] bubbleSort() {
 		b = a.clone();
@@ -41,9 +43,11 @@ public class Algos {
 		return b;
 	}
 	
-	//================================
-	// SELECTION SORT
-	//================================
+	/*
+	 * 
+	 * SELECTION SORT
+	 * 
+	 */
 	
 	public int[] selectionSort() {
 		b = a.clone();
@@ -60,9 +64,11 @@ public class Algos {
 		return b;
 	}
 	
-	//================================
-	// INSERTION SORT
-	//================================
+	/*
+	 * 
+	 * INSERTION SORT
+	 * 
+	 */
 	
 	private int binarySearch(int value, int left, int right) {
 		
@@ -125,9 +131,12 @@ public class Algos {
 	}
 	
 	
-	//================================
-	// HEAPSORT
-	//================================
+	/*
+	 * 
+	 * HEAPSORT
+	 * 
+	 */
+
 	
 	
 	private void restoreHeapCondition(int i,int end) {
@@ -161,9 +170,11 @@ public class Algos {
 	}
 	
 	
-	//================================
-	// MERGESORT
-	//================================
+	/*
+	 * 
+	 * MERGESORT
+	 * 
+	 */
 	
 	private void merge(int l,int m, int r) {
 		int i=l;
@@ -203,9 +214,11 @@ public class Algos {
 		return b;
 	}
 	
-	//================================
-	// QUICKSORT
-	//================================
+	/*
+	 * 
+	 * QUICKSORT
+	 * 
+	 */
 	
 	public void quickSort(int l, int r) {
 		int i=l;
