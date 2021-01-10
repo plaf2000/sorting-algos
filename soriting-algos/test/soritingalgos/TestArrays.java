@@ -23,14 +23,16 @@ public class TestArrays {
 	}
 	
 	public static void testMethods(int[] a) {
-		System.out.println(Arrays.toString(a));
+		System.out.println();
+		System.out.println("\t\t\t\t\t"+Arrays.toString(a));
+		System.out.println();
 		int[] aSorted = a.clone();
 		Arrays.sort(aSorted);
 		Algos algo = new Algos(a);
-		System.out.println(testMethod(aSorted,"Bubble sort",algo.bubbleSort()));
-		System.out.println(testMethod(aSorted,"Selection sort",algo.selectionSort()));
-		System.out.println(testMethod(aSorted,"Insertion sort simple",algo.insertionSort()));
-		System.out.println(testMethod(aSorted,"Insertion sort binary",algo.insertionSort(true)));
+//		System.out.println(testMethod(aSorted,"Bubble sort",algo.bubbleSort()));
+//		System.out.println(testMethod(aSorted,"Selection sort",algo.selectionSort()));
+//		System.out.println(testMethod(aSorted,"Insertion sort simple",algo.insertionSort()));
+//		System.out.println(testMethod(aSorted,"Insertion sort binary",algo.insertionSort(true)));
 		System.out.println(testMethod(aSorted,"Heap sort",algo.heapSort()));
 		System.out.println(testMethod(aSorted,"Merge sort",algo.mergeSort()));
 		System.out.println(testMethod(aSorted,"Quick sort",algo.quickSort()));

@@ -47,6 +47,7 @@ public class Algos {
 				}
 			}
 			swap(argmax,i);
+			argmax = 0;
 		}
 		return b;
 	}
@@ -56,13 +57,14 @@ public class Algos {
 	//================================
 	
 	private int binarySearch(int value, int left, int right) {
+		
 		int m = (right+left)/2;
 		if(value==b[m]) {
 			return m;
 		}
 		else if(value>b[m]) {
-			if(m+1==len || value<=b[m+1])
-				return m;
+			if(m+1==len-1 || value<=b[m+1])
+				return m+1;
 			else 
 				return binarySearch(value,m+1,right);
 		}
@@ -76,8 +78,8 @@ public class Algos {
 	
 	private void insert(int from, int to) {
 		int tmp = b[from];
-		for(int i=to; i<from; i++) {
-			b[i+1]=b[i];
+		for(int i=from; i>to; i--) {
+			b[i]=b[i-1];
 		}
 		b[to] = tmp;
 	}
@@ -87,10 +89,16 @@ public class Algos {
 	public int[] insertionSort(boolean binarySearch) {
 		b = a.clone();
 		for(int i=1; i<len; i++) {
+			
+			
 			if(binarySearch) {
 				int pos = binarySearch(b[i],0,i-1);
 				insert(i,pos);
 			}
+			
+			
+			
+			
 			else {
 				int j=i;
 				while(j>0 && b[j]<b[j-1])  {
@@ -98,6 +106,8 @@ public class Algos {
 					j--;
 				}
 			}
+			
+			
 		}
 		return b;
 	}
@@ -165,17 +175,18 @@ public class Algos {
 			p++;
 		}
 		
-		for (i=l; i<l+c.length;i++) b[l+i]=c[i];
+		for (i=l; i<l+c.length;i++) b[i]=c[i-l];
 	}
 	
 	private void mergeSort(int l, int r) {
 		int m = (r+l)/2;
-		if(m>l) {
+		if(l>r+1) {
 			mergeSort(l,m);
 			mergeSort(m+1,r);
+			merge(l,m,r);
 		}
 			
-		merge(l,m,r);
+		
 		
 		
 	}
@@ -194,18 +205,18 @@ public class Algos {
 		int i=l;
 		int j=r-1;
 		
-		
-		while(i<r) {
-			while(b[i]<=b[r]) i++;
-			while(b[j]>=b[r]) j--;
+		while(i<j) {
+			while(i<r && b[i]<=b[r]) i++;
+			while(j>0 && b[j]>=b[r]) j--;
 				  
 			swap(i,j);
 		 
 		}
-		swap(r+1,i);
-		quickSort(l,i-1);
-		quickSort(i+1,r);
-		
+		swap(r,i);
+		if(l-r>1) {
+			quickSort(l,i-1);
+			quickSort(i+1,r);
+		}
 	}
 	
 	public int[] quickSort() {
