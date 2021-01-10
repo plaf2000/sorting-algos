@@ -1,4 +1,5 @@
 package soritingalgos;
+import java.util.Arrays;
 
 public class Algos {
 	
@@ -7,16 +8,21 @@ public class Algos {
 	private int[] b;
 	
 	public Algos(int[] a) {
-		this.a = a;
+		this.a = a.clone();
 		this.len=a.length;
 	}
 	
 	private void swap(int i, int j) {
+		swap(i,j,false);
+	}
+	
+	
+	private void swap(int i, int j, boolean verbose) {
 		int t = b[i];
 		b[i] = b[j];
 		b[j] = t;
+		if(verbose) System.out.println(Arrays.toString(b));
 	}
-	
 	
 	//================================
 	// BUBBLE SORT
@@ -122,16 +128,17 @@ public class Algos {
 	//================================
 	
 	
-	private void restoreHeapCondition(int i) {
+	private void restoreHeapCondition(int i,int end) {
 		int j = i*2+1;
-		int k = i;
-		while(j<len) {
+		
+		while(j<end) {
 			
-			if(j+1<len && b[j+1]>b[j]) j++;
+			if(j+1<end && b[j+1]>b[j]) j++;
+			if(b[i]>b[j]) break;
 			
-			swap(k,j);
-			k=j;
-			j=k*2+1;
+			swap(i,j);
+			i=j;
+			j=i*2+1;
 			
 			
 		}
@@ -142,11 +149,11 @@ public class Algos {
 	public int[] heapSort() {
 		b=a.clone();
 		for(int i=(len-1)/2; i>=0; i--) {
-			restoreHeapCondition(i);
+			restoreHeapCondition(i,len);
 		}
 		for(int i=len-1; i>0; i--) {
 			swap(0,i);
-			restoreHeapCondition(0);
+			restoreHeapCondition(0,i);
 		}
 		return b;
 	}
@@ -160,7 +167,7 @@ public class Algos {
 		int i=l;
 		int j=m+1;
 		int p=0;
-		int clen=l-r+1;
+		int clen=r-l+1;
 		int[] c = new int[clen];
 		while (p<clen) {
 			if (i==m+1) 
@@ -180,14 +187,11 @@ public class Algos {
 	
 	private void mergeSort(int l, int r) {
 		int m = (r+l)/2;
-		if(l>r+1) {
+		if(r>l) {
 			mergeSort(l,m);
 			mergeSort(m+1,r);
 			merge(l,m,r);
 		}
-			
-		
-		
 		
 	}
 	
@@ -204,19 +208,33 @@ public class Algos {
 	public void quickSort(int l, int r) {
 		int i=l;
 		int j=r-1;
+		int p=r;
 		
 		while(i<j) {
-			while(i<r && b[i]<=b[r]) i++;
-			while(j>0 && b[j]>=b[r]) j--;
-				  
-			swap(i,j);
+			while(i<j && b[i]<b[r]) i++;
+			while(j>i && b[j]>b[r]) j--;
+			
+			if(i<j) {
+				swap(i,j);
+				i++;
+			}
 		 
 		}
-		swap(r,i);
-		if(l-r>1) {
-			quickSort(l,i-1);
-			quickSort(i+1,r);
+		
+		
+		if((i<r-1 || b[i]>b[r])) {	
+			swap(r,i);
+			p=i;
 		}
+		
+		if(l<p-1) {
+			quickSort(l,p-1);	
+		}
+		
+		if(p+1<r) {
+			quickSort(p+1,r);
+		}
+			
 	}
 	
 	public int[] quickSort() {
