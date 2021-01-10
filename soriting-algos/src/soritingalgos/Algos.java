@@ -26,7 +26,8 @@ public class Algos {
 		b = a.clone();
 		for(int i=0; i<len; i++) {
 			for(int j=1; j<len; j++) {
-				swap(j,j-1);
+				if(b[j]<b[j-1])
+					swap(j,j-1);
 			}
 		}
 		return b;
@@ -92,7 +93,7 @@ public class Algos {
 			}
 			else {
 				int j=i;
-				while(b[j]<b[j-1])  {
+				while(j>0 && b[j]<b[j-1])  {
 					swap(j,j-1);
 					j--;
 				}
@@ -101,7 +102,7 @@ public class Algos {
 		return b;
 	}
 	
-	public int[] insertionSortSimple() {
+	public int[] insertionSort() {
 		return insertionSort(false);
 	}
 	
@@ -113,14 +114,16 @@ public class Algos {
 	
 	private void restoreHeapCondition(int i) {
 		int j = i*2+1;
+		int k = i;
 		while(j<len) {
 			
 			if(j+1<len && b[j+1]>b[j]) j++;
-			if(b[j]<=b[i]) break;
 			
-			swap(i,j);
-			i=j;
-			j=i*2+1;
+			swap(k,j);
+			k=j;
+			j=k*2+1;
+			
+			
 		}
 	}
 	
@@ -128,7 +131,7 @@ public class Algos {
 	
 	public int[] heapSort() {
 		b=a.clone();
-		for(int i=(len-1)/2; i>=0; i++) {
+		for(int i=(len-1)/2; i>=0; i--) {
 			restoreHeapCondition(i);
 		}
 		for(int i=len-1; i>0; i--) {
@@ -167,9 +170,14 @@ public class Algos {
 	
 	private void mergeSort(int l, int r) {
 		int m = (r+l)/2;
-		mergeSort(l,m);
-		mergeSort( m+1,r);
+		if(m>l) {
+			mergeSort(l,m);
+			mergeSort(m+1,r);
+		}
+			
 		merge(l,m,r);
+		
+		
 	}
 	
 	public int[] mergeSort() {
@@ -182,13 +190,27 @@ public class Algos {
 	// QUICKSORT
 	//================================
 	
-	public void quickSort(int l, int r, int p) {
-		  
+	public void quickSort(int l, int r) {
+		int i=l;
+		int j=r-1;
+		
+		
+		while(i<r) {
+			while(b[i]<=b[r]) i++;
+			while(b[j]>=b[r]) j--;
+				  
+			swap(i,j);
+		 
+		}
+		swap(r+1,i);
+		quickSort(l,i-1);
+		quickSort(i+1,r);
+		
 	}
 	
 	public int[] quickSort() {
 		b=a.clone();
-		quickSort(0,len-2,len-1);
+		quickSort(0,len-1);
 		return b;
 	}
 	
